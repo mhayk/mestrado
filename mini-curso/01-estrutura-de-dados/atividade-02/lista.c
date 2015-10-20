@@ -1,54 +1,83 @@
 #include "lista.h"
 
-void inicializa_lista(Lista *l)
-
+Lista* cria_lista(void)
 {
-    *l = NULL;
+	Lista *lista = (Lista *) malloc(sizeof(Lista));
+	if(lista != NULL)
+		*lista = NULL;
+	else
+		printf("Não foi possível criar a lista!\n");
+		
+	return lista;
 }
 
-int lista_vazia(Lista l)
-
+void inserir_final_lista(Lista *lista, Aluno al)
 {
-    if(l == NULL)
-        return 1;
-
-    return 0;
+		if(lista == NULL)
+			printf("[error] Primeiro crie a lista\n");
+			
+		Elemento *no = (Elemento *) malloc(sizeof(Elemento));
+		
+		if(no == NULL)
+		{
+			printf("[error] Não foi possível alocar memória para o novo elemento!\n");
+			return;
+		}
+		
+		no->aluno = al;
+		no->prox = NULL;
+		
+		if( (*lista) == NULL )
+			*lista = no;
+		else
+		{
+			Elemento *aux = *lista;
+			
+			while(aux->prox != NULL)
+				aux = aux->prox;
+				
+			aux->prox = no;
+		}
+		printf("Nó inserido com sucesso\n");				
 }
 
-int insere_elemento(Lista *l, Aluno al)
+void imprime_lista(Lista *lista)
 {
-    Lista inserindo, anterior;
-
-    inserindo = (Lista) malloc(sizeof(struct no));
-    if (inserindo == NULL)
-        return 0;
-
-    inserindo->al = al;
-    
-    while (anterior->prox != NULL )
-        anterior = anterior->prox;
-
-    inserindo->prox = anterior->prox;
-    anterior->prox = inserindo;
-    return 1;
+		int i=0;
+		if(lista == NULL)
+			printf("[error] Primeiro crie a lista\n");
+		
+		Elemento *aux = *lista;	
+		
+		printf("-----------------------------------------\n");
+		printf("        Relatório de Alunos!             \n");
+		printf("-----------------------------------------\n");
+		do
+		{
+			printf("Dados do aluno[%d]....\n",i);
+			printf("A matrícula do aluno: %d\n",aux->aluno.matricula);
+			printf("Nome do aluno: %s\n",aux->aluno.nome);
+			printf("Idade aluno: %d\n",aux->aluno.idade);
+			i++;
+			aux = aux->prox;
+		} while(aux->prox != NULL);
+		printf("Dados do aluno[%d]....\n",i);
+		printf("A matrícula do aluno: %d\n",aux->aluno.matricula);
+		printf("Nome do aluno: %s\n",aux->aluno.nome);
+		printf("Idade aluno: %d\n",aux->aluno.idade);
+		printf("-----------------------------------------\n");
 }
 
-int remove_elemento(Lista *l, Aluno al)
+void libera_lista(Lista *lista)
 {
-    Lista anterior, remover;
-
-    if(lista_vazia(*l))
-        return 0;
-
-
-    while(anterior->prox != NULL && strcmp((anterior->prox)->al->matricula, al.matricula) < 0)
-        anterior = anterior->prox;
-
-    if(anterior->prox == NULL || strcmp((anterior->prox)->al->matricula, al.matricula) < 0)
-        return 0;
-
-    remover = anterior->prox;
-    anterior->prox = remover->prox;
-    free(remover);
-    return 1;
+	if(lista != NULL) {
+		Elemento *no;
+		
+		while( (*lista) != NULL) {
+			no = *lista;
+			*lista = (*lista)->prox;;
+			free(no);
+		}
+		free(lista);
+	}
 }

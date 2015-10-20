@@ -11,18 +11,19 @@ struct {
 	int idade;
 } typedef Aluno;
 
-struct no{
-    Aluno al;
-    struct no *prox;
+struct elemento {
+    Aluno aluno;
+    struct elemento *prox;
 
 };
 
-typedef struct no *Lista;
+typedef struct elemento *Lista;
+typedef struct elemento Elemento;
 
-void inicializa_lista(Lista *l);
-int lista_vazia(Lista l);
-int insere_elemento(Lista *l, Aluno al);
-int remove_elemento(Lista *l, Aluno al);
+Lista* cria_lista();
+void inserir_final_lista(Lista *lista, Aluno al);
+void imprime_lista(Lista *lista);
+void libera_lista(Lista *lista);
 
 
 #endif 
