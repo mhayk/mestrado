@@ -4,3 +4,5 @@ all: lista
 lista: 
 	gcc -c lista.c
 
+clean:
+	rm -rf lista.o main
