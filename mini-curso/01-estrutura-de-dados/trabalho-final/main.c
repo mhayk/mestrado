@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	ListaHash *lista;
 	Palavra *word;
 	Palavra waux;
-	int line = 0;
+	int line = -1;
 	
 	char filename[255];
 	char nome[255]; 
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 	fclose(fd);
 
 	print_all(lista);
-	printf("Total de linhas: %d\n",line);
+	//printf("Total de linhas: %d\n",line);
 
 	return 0;
 }

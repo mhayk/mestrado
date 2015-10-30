@@ -51,18 +51,20 @@ void HASH_inserir_final_lista(ListaHash *lista, Palavra al, int linha)
 
 void LINHA_inserir_final_lista(ListaLinha *lista, int linha, int amount)
 {
-	ElementoLinha *no;
+
 	if (lista == NULL)
 	{
-		no = (ElementoLinha *) malloc(sizeof(ElementoLinha));
 	}
 
-	no->prox = NULL;
+	ElementoLinha *no;
+	no = (ElementoLinha *) malloc(sizeof(ElementoLinha));
+
 	no->line = linha;
 	no->amount = amount;
+	no->prox = NULL;
 
 	if( (*lista) == NULL)
-		*lista = no->prox;
+		*lista = no;
 	else
 	{
 		ElementoLinha *aux = *lista;
@@ -133,8 +135,13 @@ int HASH_pesquisar_lista(ListaHash *lista, int indice, int linha)
 		/* Índice já existe na lista! */
 		//printf("Indice já existe na lista! : %d\n",no->word.indice);
 		//*el = &no->word;
-		LINHA_pesquisar_lista(&no->lprox, linha);
-		return 1;
+		if(!LINHA_pesquisar_lista(&no->lprox, linha))
+		{
+			//printf("I\n");
+			LINHA_inserir_final_lista(&no->lprox, linha, 1);
+		}
+		else
+			return 1;
 	}
 }
 
