@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	ListaHash *lista;
 	Palavra *word;
 	Palavra waux;
-	int line = -1;
+	int line = 0;
 	
 	char filename[255];
 	char nome[255]; 
@@ -46,10 +46,6 @@ int main(int argc, char *argv[])
 	while( feof(fd) == 0)
 	{
 		while( fscanf(fd, "%s", nome) != EOF ) {
-
-			ch = fgetc(fd);
-			if (ch == '\n')
-				line++;
 
 			indice = hash(nome);
 			//printf("%s -> %d\n",nome,indice);
@@ -80,6 +76,11 @@ int main(int argc, char *argv[])
 					}
 					*/
 			}
+			ch = fgetc(fd);
+			if (ch == '\n')
+				line++;
+
+
 
 		}
 	}
