@@ -5,31 +5,42 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct {
-	int matricula;
-	char nome[255];
-	int idade;
-} typedef Aluno;
 
-struct no_line {
+struct lista_linha {
 	int line;
 	int amount;
-	struct no_line *prox;
-} typedef *ListaLine, ElementoLine;
+	struct lista_linha *prox;
+};
 
-struct no_hash {
-    Aluno aluno;
-	struct no_line *linha;
-    struct no_hash *prox;
-}typedef *Lista, Elemento;
+typedef struct lista_linha *ListaLinha;
+typedef struct lista_linha ElementoLinha;
 
-//typedef struct elemento *Lista;
-//typedef struct elemento Elemento;
+struct stpalavra {
+	int indice;
+	char word[255];
+};
+typedef struct stpalavra Palavra;
 
-Lista* cria_lista();
-void inserir_final_lista(Lista *lista, Aluno al);
-void imprime_lista(Lista *lista);
-void libera_lista(Lista *lista);
+struct lista_hash {
+	Palavra word;
+	struct lista_linha *lprox;
+    struct lista_hash *prox;
+};
+
+typedef struct lista_hash *ListaHash;
+typedef struct lista_hash ElementoHash;
+
+ListaHash* HASH_cria_lista();
+void HASH_inserir_final_lista(ListaHash *lista, Palavra word, int linha);
+void HASH_imprime_lista(ListaHash *lista);
+void HASH_libera_lista(ListaHash *lista);
+int HASH_pesquisar_lista(ListaHash *lista, int indice, int linha);
+
+void print_all(ListaHash *lista);
+
+ListaLinha* LINHA_cria_lista();
+int LINHA_pesquisar_lista(ListaLinha *lista, int line);
+void LINHA_inserir_final_lista(ListaLinha *lista, int linha, int amount);
 
 
 #endif 

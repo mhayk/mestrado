@@ -1,8 +1,8 @@
 #include "lista.h"
 
-Lista* cria_lista(void)
+ListaHash* HASH_cria_lista(void)
 {
-	Lista *lista = (Lista *) malloc(sizeof(Lista));
+	ListaHash *lista = (ListaHash *) malloc(sizeof(ListaHash));
 	if(lista != NULL)
 		*lista = NULL;
 	else
@@ -11,13 +11,12 @@ Lista* cria_lista(void)
 	return lista;
 }
 
-void inserir_final_lista(Lista *lista, Aluno al)
+void HASH_inserir_final_lista(ListaHash *lista, Palavra al, int linha)
 {
 		if(lista == NULL)
 			printf("[error] Primeiro crie a lista\n");
 			
-		Elemento *no = (Elemento *) malloc(sizeof(Elemento));
-		Elemento *aux = *lista;
+		ElementoHash *no = (ElementoHash *) malloc(sizeof(ElementoHash));
 		
 		if(no == NULL)
 		{
@@ -25,23 +24,57 @@ void inserir_final_lista(Lista *lista, Aluno al)
 			return;
 		}
 		
-		no->aluno = al;
+		no->word = al;
 		no->prox = NULL;
 		
 		if( (*lista) == NULL )
 			*lista = no;
 		else
 		{
-			
+			ElementoHash *aux = *lista;
 			while(aux->prox != NULL)
 				aux = aux->prox;
 				
-			aux->prox = (Elemento *) no;
+			aux->prox = no;
 		}
-		printf("Nó inserido com sucesso\n");				
+		//printf("Nó inserido com sucesso\n");				
+
+		ElementoLinha *lno = (ElementoLinha *) malloc(sizeof(ElementoLinha));
+
+		lno->line = linha;
+		lno->amount = 1;
+		lno->prox = NULL;
+
+		no->lprox = lno;
+		//printf("Nó da lista da palavra %s inserido com sucesso!\n",no->word.word);
 }
 
-void imprime_lista(Lista *lista)
+void LINHA_inserir_final_lista(ListaLinha *lista, int linha, int amount)
+{
+	ElementoLinha *no;
+	if (lista == NULL)
+	{
+		no = (ElementoLinha *) malloc(sizeof(ElementoLinha));
+	}
+
+	no->prox = NULL;
+	no->line = linha;
+	no->amount = amount;
+
+	if( (*lista) == NULL)
+		*lista = no->prox;
+	else
+	{
+		ElementoLinha *aux = *lista;
+		while(aux->prox != NULL)
+			aux = aux->prox;
+
+		aux->prox = no;
+	}
+	//printf("Sub-nó inserido com sucesso\n");
+}
+
+/*void imprime_lista(Lista *lista)
 {
 		int i=0;
 		if(lista == NULL)
@@ -66,12 +99,12 @@ void imprime_lista(Lista *lista)
 		printf("Nome do aluno: %s\n",aux->aluno.nome);
 		printf("Idade aluno: %d\n",aux->aluno.idade);
 		printf("-----------------------------------------\n");
-}
+}*/
 
-void libera_lista(Lista *lista)
+void HASH_libera_lista(ListaHash *lista)
 {
 	if(lista != NULL) {
-		Elemento *no;
+		ElementoHash *no;
 		
 		while( (*lista) != NULL) {
 			no = *lista;
@@ -79,5 +112,69 @@ void libera_lista(Lista *lista)
 			free(no);
 		}
 		free(lista);
+	}
+}
+
+int HASH_pesquisar_lista(ListaHash *lista, int indice, int linha)
+{
+	if( lista == NULL)
+		return 0;
+
+	ElementoHash *no = *lista;
+	
+	while( no != NULL && no->word.indice != indice)
+	{
+		no = no->prox;
+	}
+
+	if( no == NULL)
+		return 0;
+	else{
+		/* Índice já existe na lista! */
+		//printf("Indice já existe na lista! : %d\n",no->word.indice);
+		//*el = &no->word;
+		LINHA_pesquisar_lista(&no->lprox, linha);
+		return 1;
+	}
+}
+
+int LINHA_pesquisar_lista(ListaLinha *lista, int line)
+{
+	if( lista == NULL)
+		return 0;
+
+	ElementoLinha *no = *lista;
+
+	while( no != NULL && no->line != line)
+		no = no->prox;
+
+	if( no == NULL)
+	{
+		return 0;
+	}
+	else {
+		/* Incrementa a quantidade referente a palavra que já encontra-se inserido. */
+		//printf("!!=====!! [%d] JÁ EXISTE ! INCREMENTANDO AMOUNT++!!!-> \n",no->line);
+		no->amount++;
+	}
+
+}
+
+void print_all(ListaHash *lista)
+{
+	ElementoHash *no = *lista;
+	ElementoLinha *lno;
+
+	while( no != NULL )
+	{
+		printf("%s: ",no->word.word);
+		lno = no->lprox;
+		while ( lno != NULL)
+		{
+			printf("(%d,%d) ",lno->line, lno->amount);
+			lno = lno->prox;
+		}
+		printf("\n");
+		no = no->prox;
 	}
 }
