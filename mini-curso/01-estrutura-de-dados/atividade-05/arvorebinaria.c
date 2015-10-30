@@ -4,36 +4,49 @@ void criarArvore(No **pRaiz){
     *pRaiz = NULL;
 }
 
-void inserirDireitaDe(No **pRaiz, int numero, int Novonumero)
-{
-	No *eleito = NULL;
-	
-	eleito = BuscaEmOrdem(*pRaiz, Novonumero);
-	
-	if(eleito == NULL)
-	{
-		printf("O número [%d] não foi localizado na árvore!\n",Novonumero);
-		return;
-	}
-	
-	inserir(&(*pRaiz)->direita, Novonumero);
-}
-
-void inserirEsqueraDe(No **pRaiz, int numero, int Novonumero)
+void inserirValorNaArvore(No **pRaiz, int ValorASerInserido, char direcao, int valorDoPai)
 {
 	No *eleito;
 	
-	eleito = BuscaEmOrdem(*pRaiz, numero);
+	eleito = BuscaEmOrdem(*pRaiz, valorDoPai);
 	
 	if(eleito == NULL)
 	{
-		printf("\nO número [%d] não foi localizado na árvore!\n",numero);
-		printf("%d\n",eleito->numero);
+		printf("\nO número [%d] não foi localizado na árvore!\n",valorDoPai);
 		return;
 	}
 	
-	inserir(&(*pRaiz)->esquerda, Novonumero);
-		
+	No *novo;
+
+	novo = (No *) malloc(sizeof(struct No));
+	novo->numero = ValorASerInserido;
+	novo->esquerda = NULL;
+	novo->direita = NULL;
+
+
+	if(direcao == 'E')
+	{
+		if(eleito->esquerda != NULL)
+		{
+			printf("\nJá existe elemento na posição esquerda de %d\n",valorDoPai);
+			return;
+		}
+		eleito->esquerda = novo;
+	}
+	
+	if(direcao == 'D')
+	{
+		if(eleito->direita != NULL)
+		{
+			printf("\nJá existe elemento na posição direita de %d\n",valorDoPai);
+			printf("Direita: %d\n",eleito->numero);
+			printf("Direita: %d\n",eleito->direita);
+			printf("Direita: %d\n",eleito->esquerda);
+			return;
+		}
+		eleito->direita = novo;
+	}
+	
 }
 
 void inserir(No **pRaiz, int numero){

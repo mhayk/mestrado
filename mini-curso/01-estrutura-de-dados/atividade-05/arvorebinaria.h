@@ -12,9 +12,10 @@ struct No{
 typedef struct No No;
 
 void criarArvore(No **pRaiz);
-void inserirold(No **pRaiz, int numero);
-void inserirDireitaDe(No **pRaiz, int numero, int Novonumero);
-void inserirEsqueraDe(No **pRaiz, int numero, int Novonumero);
+void inserirold(No **pRaiz, int numero, char posicao);
+//void inserirDireitaDe(No **pRaiz, int numero, int Novonumero);
+//void inserirEsqueraDe(No **pRaiz, int numero, int Novonumero);
+void inserirValorNaArvore(No **pRaiz, int ValorASerInserido, char direcao, int valorDoPai);
 void exibirEmOrdem(No *pRaiz);
 void exibirPreOrdem(No *pRaiz);
 void exibirPosOrdem(No *pRaiz);
