@@ -9,8 +9,9 @@ int main(void)
 	inserir(&raiz, 8);
 	inserir(&raiz, 15);
 	exibirEmOrdem(raiz);
-	inserirValorNaArvore(&raiz, 2, 'D', 8);
+	inserirValorNaArvore(&raiz, 2, 'E', 15);
 	printf("\n......\n");
 	exibirEmOrdem(raiz);
+	printf("\n");
 	return 0;
 }

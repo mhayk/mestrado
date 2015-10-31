@@ -9,7 +9,7 @@ void inserirValorNaArvore(No **pRaiz, int ValorASerInserido, char direcao, int v
 	No *eleito;
 	
 	eleito = BuscaEmOrdem(*pRaiz, valorDoPai);
-	
+
 	if(eleito == NULL)
 	{
 		printf("\nO número [%d] não foi localizado na árvore!\n",valorDoPai);
@@ -39,9 +39,6 @@ void inserirValorNaArvore(No **pRaiz, int ValorASerInserido, char direcao, int v
 		if(eleito->direita != NULL)
 		{
 			printf("\nJá existe elemento na posição direita de %d\n",valorDoPai);
-			printf("Direita: %d\n",eleito->numero);
-			printf("Direita: %d\n",eleito->direita);
-			printf("Direita: %d\n",eleito->esquerda);
 			return;
 		}
 		eleito->direita = novo;
@@ -92,14 +89,14 @@ No* BuscaEmOrdem(No *pRaiz, int numero)
 	if(pRaiz != NULL){
 		if(pRaiz->numero == numero){
 			//printf("\n%d == %d ?\n",pRaiz->numero, numero);
-			return &pRaiz->esquerda;
+			return pRaiz;
 		}
 		else
 			BuscaEmOrdem(pRaiz->esquerda, numero);
         
         if(pRaiz->numero == numero){
 			//printf("\n%d == %d ?\n",pRaiz->numero, numero);
-			return &pRaiz->direita;
+			return pRaiz;
 		}
 		else
 			BuscaEmOrdem(pRaiz->direita, numero);   
