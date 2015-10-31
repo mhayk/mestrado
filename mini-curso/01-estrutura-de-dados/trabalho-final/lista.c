@@ -76,33 +76,6 @@ void LINHA_inserir_final_lista(ListaLinha *lista, int linha, int amount)
 	//printf("Sub-nó inserido com sucesso\n");
 }
 
-/*void imprime_lista(Lista *lista)
-{
-		int i=0;
-		if(lista == NULL)
-			printf("[error] Primeiro crie a lista\n");
-		
-		Elemento *aux = *lista;	
-		
-		printf("-----------------------------------------\n");
-		printf("        Relatório de Alunos!             \n");
-		printf("-----------------------------------------\n");
-		do
-		{
-			printf("Dados do aluno[%d]....\n",i);
-			printf("A matrícula do aluno: %d\n",aux->aluno.matricula);
-			printf("Nome do aluno: %s\n",aux->aluno.nome);
-			printf("Idade aluno: %d\n",aux->aluno.idade);
-			i++;
-			aux = aux->prox;
-		} while(aux->prox != NULL);
-		printf("Dados do aluno[%d]....\n",i);
-		printf("A matrícula do aluno: %d\n",aux->aluno.matricula);
-		printf("Nome do aluno: %s\n",aux->aluno.nome);
-		printf("Idade aluno: %d\n",aux->aluno.idade);
-		printf("-----------------------------------------\n");
-}*/
-
 void HASH_libera_lista(ListaHash *lista)
 {
 	if(lista != NULL) {

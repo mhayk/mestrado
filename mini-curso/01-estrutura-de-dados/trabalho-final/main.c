@@ -9,15 +9,12 @@ int hash (const char* word)
 	int size = strlen(word);
 	for (i = 0; word[i] != '\0'; i++)
 	{
-		// alphabet case
 		if(isalpha(word[i]))
 			n = word [i] - 'a' + 1;
 
-		// comma case
 		else
 			n = 27;
 
-		//hash = ((hash << 3) + n) % size;
 		hash = ((hash << 3) + n);
 	}
 	return hash;
@@ -42,53 +39,28 @@ int main(int argc, char *argv[])
 	fd = fopen(filename, "r");
 
 	lista = HASH_cria_lista();
-	
-	while( feof(fd) == 0)
-	{
-		while( fscanf(fd, "%s", nome) != EOF ) {
 
-			indice = hash(nome);
-			//printf("%s -> %d\n",nome,indice);
-			if(!HASH_pesquisar_lista(lista, indice, line))
-			{
-				//printf("Não encontrei o indice %d\n",indice);
-				waux.indice = indice;
-				strcpy(waux.word, nome);
-				HASH_inserir_final_lista(lista, waux, line);
+	while( fscanf(fd, "%s", nome) != EOF ) {
 
-			}
-			else
-			{
-					/*Se já existir na lista ... */
-					/*
-					printf("Já encontrei o índice %d -> %s\n",word->indice,word->word);
-					if(word->prox == NULL)
-					{
-						printf("Na lista LINE não possui nenhum elemento ainda!\n");
-						if(!LINHA_pesquisa_listA(listaLinha, linha))
-						{
-							LINHA_inserir_final_lista(listaLinha);
-						}
-						else
-						{
-							// Ao pesquisa quando ele já encontra.. ele já incrementa a quantidade. 
-						}
-					}
-					*/
-			}
-			ch = fgetc(fd);
-			if (ch == '\n')
-				line++;
-
-
+		indice = hash(nome);
+		//printf("%s -> %d\n",nome,indice);
+		if(!HASH_pesquisar_lista(lista, indice, line))
+		{
+			//printf("Não encontrei o indice %d\n",indice);
+			waux.indice = indice;
+			strcpy(waux.word, nome);
+			HASH_inserir_final_lista(lista, waux, line);
 
 		}
+		ch = fgetc(fd);
+		if (ch == '\n')
+			line++;
+
 	}
 
 	fclose(fd);
 
 	print_all(lista);
-	//printf("Total de linhas: %d\n",line);
 
 	return 0;
 }
