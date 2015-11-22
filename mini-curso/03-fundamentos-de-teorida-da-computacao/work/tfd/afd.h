@@ -28,5 +28,18 @@ int qtdEstadosFinais = 0;
 char palavra[100][100];
 int qtdPalavras;
 
+void VerificaSimbolos(char verifica[]);
+void VerificaEstados(char verifica[]);
+void eFinal(char plvra[]);
+void eErro(char plvra[]);
+int temLetraNessaPosicao(int pos, char plvra[]);
+void LerTransicaoEstado(int posicao, char qualPalavra[], char qualEstado[]);
+void Iniciar(char plvra[]);
+void ImprimeEstados();
+void ImprimeAlfabeto();
+void ImprimeTransicoes();
+void ImprimeEstadoInicial();
+void ImprimeEstadoFinal();
+void ImprimePalavras();
 
 #endif
