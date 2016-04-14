@@ -1,0 +1,58 @@
+/********************************************************************
+ Explicação sobre a utilização dos comandos bagof, setof e findall.
+********************************************************************/
+[bagof]
+1. bagof(Criança, idade(Criança, 5), Lista).
+Lista = [ana, tomas, bruna].
+2. bagof(Criança, idade(Criança, 2), Lista).
+false.
+3. bagof(Criança, idade(Criança, Idade), Lista).
+bagof(Criança, idade(Criança, Idade), Lista).
+Idade = 5,
+Lista = [ana, tomas, bruna] ;
+Idade = 6,
+Lista = [carla] ;
+Idade = 7,
+Lista = [pedro, paulo] ;
+Idade = 8,
+Lista = [patricia, carlos].
+4. bagof(Criança, idade^idade(Criança, Idade), Lista).
+Idade = 5,
+Lista = [ana, tomas, bruna] ;
+Idade = 6,
+Lista = [carla] ;
+Idade = 7,
+Lista = [pedro, paulo] ;
+Idade = 8,
+Lista = [patricia, carlos].
+
+
+[setof]
+1. setof(Criança, idade(Criança, 5), Lista).
+Lista = [ana, bruna, tomas].
+2. setof(Criança, idade(Criança, 2), Lista).
+false.
+3. setof(Criança, idade(Criança, Idade), Lista).
+Idade = 5,
+Lista = [ana, bruna, tomas] ;
+Idade = 6,
+Lista = [carla] ;
+Idade = 7,
+Lista = [paulo, pedro] ;
+Idade = 8,
+Lista = [carlos, patricia].
+4. setof(Criança, idade^idade(Criança, Idade), Lista).
+Idade = 5,
+Lista = [ana, bruna, tomas] ;
+Idade = 6,
+Lista = [carla] ;
+Idade = 7,
+Lista = [paulo, pedro] ;
+Idade = 8,
+Lista = [carlos, patricia].
+
+[findall]
+1. findall(Criança,idade(Criança,Idade),Lista).
+Lista = [pedro, ana, patricia, tomas, bruna, paulo, carlos, carla].
+2. findall(Criança,idade(Criança,2),Lista).
+Lista = [].
