@@ -280,8 +280,8 @@ bool	AStarSearch(string StartName, string GoalName)
 
 	Frontier.push_back(StartCity);
 
-	cout<<"\nRecording Exploratory Process:\n"<<"Start Location: "<<
-		StartName<<"\t Ending Location: "<<GoalName<<endl;
+	cout<<"\nGravando Processo Exploratório:\n"<<"Localização Inicial: "<<
+		StartName<<"\t Localização Final: "<<GoalName<<endl;
 
 //Get Next Location on the Frontier
 			
@@ -305,14 +305,14 @@ bool	AStarSearch(string StartName, string GoalName)
 					" - " + ChildCity.Name;
 				ChildCity.AccumulatedDistance=CurrentCity.AccumulatedDistance +
 					CurrentNeighbor.Distance;
-				cout<<"Current Expanded Path: "<<ChildCity.AccumulatedPath<<
-					" Distance: "<<ChildCity.AccumulatedDistance<<endl;
+				cout<<"Caminho corrente expandido: "<<ChildCity.AccumulatedPath<<
+					" Distância: "<<ChildCity.AccumulatedDistance<<endl;
 
 				if(ChildCity.Name==GoalName)
 				{
 					GoalDistance=ChildCity.AccumulatedDistance;
 					GoalPath=ChildCity.AccumulatedPath;
-					cout<<"Goal Path: "<<GoalPath<<" Distance: "<<
+					cout<<"Caminho até o destino: "<<GoalPath<<" Distância: "<<
 						GoalDistance<<endl;
 					GoalFound=true;
 				}
@@ -321,8 +321,8 @@ bool	AStarSearch(string StartName, string GoalName)
 		}
 	}
 
-	cout<<"\n\nBest Goal Path:\n";
-	cout<<GoalPath<<" Distance: "<<GoalDistance<<endl;
-	cout<<"Evaluation Complete\n";
+	cout<<"\n\nMelhor caminho até o destino:\n";
+	cout<<GoalPath<<" Distância: "<<GoalDistance<<endl;
+	cout<<"Avaliação concluída.\n";
 	return true;
 }

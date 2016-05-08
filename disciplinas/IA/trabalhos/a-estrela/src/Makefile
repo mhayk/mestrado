@@ -7,7 +7,7 @@ astar.h: astar.o
 	g++ -c astar.cpp 
 
 main: city.h astar.h
-	g++ main.cpp city.o astar.o -o program
+	g++ main.cpp city.o astar.o -o a-estrela
 
 clean:
-	rm -rf city.o astar.o program
+	rm -rf city.o astar.o a-estrela
